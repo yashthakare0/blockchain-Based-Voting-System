@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Voting System</title>
+    <script type="module" src="firebaseauth.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        color: #333;
+    }
+    
+
+        .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+  background-color: #800678;
+        position: relative;
+        height: 50px;
+    }
+
+
+    
+
+    
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+    }
+    
+    .nav-links li {
+        display: inline;
+    }
+    
+    .nav-item {
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        font-size: larger;
+    }
+
+    .nav-item.active {
+        background-color: #006994; /* Active state */
+         align-items:center ;
+    }
+    ul li:hover a{
+        background-color: #006994; /* Active state */
+        align-items:center ;
+}
+    
+    .search-bar {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .search-bar input {
+        padding: 5px;
+        border: none;
+        border-radius: 4px;
+    }
+    
+    .search-bar button {
+        padding: 5px 10px;
+        border: none;
+        background-color: #4682b4;
+        color: #ffffff;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .search-bar button:hover {
+        background-color: #315f72;
+    }
+    
+    .menu-toggle {
+        display: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #ffffff;
+    }
+    
+    /* Content styles */
+    .content {
+        padding: 20px;
+    }
+    
+    /* Blockchain info styles */
+    .blockchain-info {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: aqua; /* Light blue background */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    
+    /* Modern registration form styles */
+    .registration-container {
+        max-width: 400px;
+        margin: 40px auto;
+        background-color: aqua;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding-LEFT: 10PX;
+    }
+    
+    .registration-form {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .input-group {
+        margin-bottom: 15px;
+        position: relative;
+    }
+    
+    .input-group input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+        transition: border 0.3s;
+        font-size: 14px;
+    }
+    
+    .input-group input:focus {
+        border-color: #00796b;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+    
+    .input-group label {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #ffffff;
+        padding: 0 5px;
+        font-size: 12px;
+        color: #888;
+        transition: 0.2s;
+        pointer-events: none;
+    }
+ 
+    .input-group input:not(:placeholder-shown) + label {
+        top: -10px;
+        font-size: 10px;
+        color: #00796b;
+    }
+    
+    .btn {
+        padding: 12px;
+        background-color: #00796b;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    
+    .btn:hover {
+        background-color: #004d40;
+        transform: translateY(-4px);
+padding-left: opx;
+    }
+    
+     
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+
+
+
+
+
+
+.container {
+    max-width: 12O0px;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    margin top: 70px;
+    
+  
+    
+}
+
+.box-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+
+
+.box {
+    
+
+    width: calc(33.33% - 20px);
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px ;
+    height:400px;
+    width: 800px;
+ 
+    border: 1px solid #ff0000; /* Red border */
+    border-color: #00ff00; /* Green border */
+    border-top-color: #0000ff; /* Blue top border */
+    border-style: solid;
+    border-width: 2px;
+    background-color:skyblue;
+}
+
+}
+
+.box-image {
+    width: 50px;
+    height: 5px;
+    margin: 0 auto;
+    object-fit: cover;
+  
+}
+
+.box h3 {
+    font-weight: bold;
+    margin-bottom: 10px;
+ 
+}
+
+.box p {
+    font-size: 16px;
+    color: #666;
+}
+
+.medium-box {
+    background-color: #f7f7f7;
+    padding: 30px;
+    margin: 30px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #007bff;
+}
+
+.medium-box h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    background-color: #007bff;
+}
+
+.medium-box p {
+    font-size: 18px;
+    background-color: #007bff;
+}
+
+
+
+
+.box1 {
+  width: 1490px;
+  height:650px;
+  margin-top: 0px;
+  border: 1px solid #ddd;
+  margin-left: 20px;
+image-orientation: initial; fit
+}
+
+.box1 img {
+   width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+  .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            
+            font-size: 14px;
+     margin-left: 0px;
+            bottom: 0;
+            width: 1470px;
+        
+        }
+        .footer-content {
+            max-width: 2000px;
+          text-align: center;
+            margin-left: 0px;
+        }
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+  
+
+
+</style>
+
+   
+
+  
+
+    <!-- Your content here -->
+    
+    <div class="mode-toggle-container">
+        <button class="mode-toggle">
+            <span class="light-mode-icon"></span>
+            <span class="dark-mode-icon"></span>
+        </button>
+    </div>
+    
+   
+
+    <script src="script.js"></script>
+
+
+   
+  
+
+
+  
+
+    <nav class="navbar">
+     
+    
+        <div class="logo">
+           <h1> <p>Blockchain Voting System</h1>
+           </div>
+
+        <ul class="nav-links">
+        
+            <li><a href="index.html" class="nav-item" onclick="setActive(this)">Home</a></li>
+            <li><a href="page5.html" class="nav-item" onclick="setActive(this)">Voting Rules</a></li>
+            <li><a href="page4.html" class="nav-item" onclick="setActive(this)">Election Dates</a></li>
+            <li><a href="sign.html" class="nav-item" onclick="setActive(this)">Login</a></li>
+            <li><a href="j.html" class="nav-item" onclick="setActive(this)">Admin</a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" placeholder="Type here..." id="search-input">
+            <button onclick="searchFunction()">Search</button>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+    </nav>
+
+    
+   
+   </div>
+
+
+
+   <div class="box1">
+    <img src="image.png" alt="BJP Image">
+  </div>
+  <div style="height: 80px; background-color:skyblue; margin-top: 40px ;"> <PRE>  <B> <H1>               STEPS FOR ONLINE VOTING</H1 </B> </PRE></div>
+      <div class="container">
+        <div class="box-row">
+            <div class="box">
+                <img src="T.png" alt="Login" class="box-image">
+                <h2>Login to Website</h3>
+              <h3><b> <p>Logging into a blockchain-based voting system website typically involves a secure authentication process to ensure the integrity of the voting process.
+                Once logged in, users can access the voting interface, where they can:
+
+- View Voting Options: Review available voting options, including candidates or proposals.
+- Cast Votes: Submit their votes securely through the blockchain network.
+- Track Voting Status: Monitor the voting process and view real-time results.
+
+
+                   
+              </h3> </b>   </p>
+            </div>
+            <div class="box">
+                <img src="p.png" alt="Cast Vote" class="box-image">
+                <h3>Cast Your Vote</h3>
+                <h3><b> <p>- Authentication: Once registered, you'll be authenticated through a secure process, which may include fingerprint recognition, facial recognition, or a one-time password ¹.
+                    - Voting: After authentication, you can cast your vote by selecting your preferred candidate or option. Your vote will be recorded on the blockchain, ensuring its security and transparency ¹ ².
+                </h3> </b>   </p>
+            </div>
+            <div class="box">
+                <img src="O.png" alt="Verify Vote" class="box-image">
+                <h3>Verify Your Vote</h3>
+                <h3><b> <p>Verification Steps:
+
+                    Option 1: Transaction ID (TXID)
+                    
+                    1. Check your email or voting platform dashboard for TXID.
+                    2. Visit the blockchain explorer website (e.g., Etherscan, (link unavailable)).
+                    3. Enter TXID in the search bar.
+                    4. Verify vote details (e.g., candidate, timestamp).
+                    
+                    Option 2: Voter ID
+                    
+                    1. Log in to the voting platform.
+                    2. Go to "My Votes" or "Vote History."
+                    3. Enter Voter ID or password.
+                    4. Verify vote details.
+                </h3> </b>   </p>
+            </div>
+        </div>
+    
+ <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Blockchain Voting System. All rights reserved.</p>
+            <div class="social-media">
+               
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        function searchFunction() {
+            const query = document.getElementById('search-input').value;
+            alert("Search feature not implemented yet. Query: " + query);
+        }
+ 
+
+    </script>
+
+  </head>
+</body>

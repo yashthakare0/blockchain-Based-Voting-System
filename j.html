@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Login Form</title>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC_c192YgYv1PNC8UspxsXdqm5tLpnh_AE",
+            authDomain: "nice-3fbc5.firebaseapp.com",
+            databaseURL: "https://nice-3fbc5-default-rtdb.firebaseio.com",
+            projectId: "nice-3fbc5",
+            storageBucket: "nice-3fbc5.firebasestorage.app",
+            messagingSenderId: "131745993072",
+            appId: "1:131745993072:web:6c0e4b86d85703fdafffb5"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        // Submit event for form
+        document.getElementById("submit").addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Allow login only for specific email/password
+            if (email === "vote@gmail.com" && password === "123456") {
+                // Authenticate user using Firebase Auth
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        // User signed in successfully
+                        const user = userCredential.user;
+                        alert("Login Successful!");
+
+                        // Add user data to Firebase Realtime Database
+                        set(ref(db, 'user/' + user.uid), {
+                            email: email
+                        }).then(() => {
+                            alert("User information saved successfully!");
+                        }).catch((error) => {
+                            console.error("Error writing to database: ", error);
+                        });
+
+                        // Redirect to a new page after login
+                        window.location.href = "welcome.html"; // Update with your target page
+                    })
+                    .catch((error) => {
+                        console.error("Error during login: ", error);
+                        alert("Invalid login credentials");
+                    });
+            } else {
+                alert("Enter proper credentials");
+            }
+        });
+    </script>
+    <style>
+        body {
+            background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            margin: 150px auto 40px;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-form .inputbox {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            background-color: #f8f8f8;
+            transition: border-color 0.3s;
+        }
+
+        .login-form input:focus {
+            border-color: #0cc0df;
+            background-color: #fff;
+        }
+
+        .login-form .inputbox span {
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            font-size: 14px;
+            color: #777;
+            font-weight: bold;
+        }
+
+        .login-form button {
+            padding: 12px 15px;
+            background-color: #0cc0df;
+            color: #fff;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .login-form button:hover {
+            background-color: #0096b0;
+            transform: scale(1.05);
+        }
+
+        .login-form .error {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .forgot-password a {
+            color: #0cc0df;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #800678;
+            position: relative;
+            height: 50px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: larger;
+        }
+
+        .nav-item.active {
+            background-color: #006994; /* Active state */
+        }
+
+        ul li:hover a {
+            background-color: #006994;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 5px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .search-bar button {
+            padding: 5px 10px;
+            border: none;
+            background-color: #4682b4;
+            color: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #315f72;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-links li {
+                text-align: left;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .search-bar {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .login-container h2 {
+                font-size: 24px;
+            }
+
+            .nav-item {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+           <h1>Blockchain Voting System</h1>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-item" onclick="setActive(this)">Home</a></li>
+            <li><a href="page5.html" class="nav-item" onclick="setActive(this)">Voting Rules</a></li>
+            <li><a href="page4.html" class="nav-item" onclick="setActive(this)">Election Dates</a></li>
+            <li><a href="sign.html" class="nav-item" onclick="setActive(this)">Login</a></li>
+            <li><a href="j.html" class="nav-item" onclick="setActive(this)">Admin</a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" placeholder="Type here..." id="search-input">
+            <button onclick="searchFunction()">Search</button>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+    </nav>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form class="login-form">
+            <div class="inputbox">
+                <input type="email" id="email" placeholder="Email" required />
+                <span>Email</span>
+            </div>
+            <div class="inputbox">
+                <input type="password" id="password" placeholder="Password" required />
+                <span>Password</span>
+            </div>
+            <button type="submit" id="submit">Login</button>
+        </form>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Blockchain Voting System. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        function searchFunction() {
+            const query = document.getElementById('search-input').value;
+            alert("Search feature not implemented yet. Query: " + query);
+        }
+    </script>
+</body>
+</html>
+

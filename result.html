@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Table with Pie Chart</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css"/>
+    <style>
+        /* Style for smaller pie chart */
+        #voteChart {
+            max-width: 300px;
+            max-height: 300px;
+            margin: auto;
+        }
+         body{ background:linear-gradient(to right, #e2e2e2, #c9d6ff);
+} 
+    </style>
+</head>
+<body>
+<h1>Voting Results</h1>
+
+<!-- Table -->
+<table id="pizza_party" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>full-name</th>
+            <th>mobile-number</th>
+            <th>vote-given-to-party</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>full-name</th>
+            <th>mobile-number</th>
+            <th>vote-given-to-party</th>
+        </tr>
+    </tfoot>
+</table>
+
+<!-- Pie Chart -->
+<h2>Vote Distribution</h2>
+<canvas id="voteChart"></canvas>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+$(document).ready(function () {
+    // Initialize the DataTable
+    const table = new DataTable('#pizza_party', {
+        ajax: 'https://script.google.com/macros/s/AKfycbzGF-lVbGMcisIX33Rot6t7_5mgnW4XXxDhzYv2O2Hc5ycRMGkh9xxiIGDggcxeeYLv/exec',
+        columns: [
+            { data: 'full-name' },
+            { data: 'mobile-number' },
+            { data: 'vote-given-to-party' },
+        ],
+        initComplete: function () {
+            // Process data for the pie chart after table is loaded
+            processChartData(this.api().data());
+        }
+    });
+
+    // Function to process data and render pie chart
+    function processChartData(data) {
+        // Extract vote data and count occurrences
+        const voteCounts = {};
+        data.each(function (row) {
+            const party = row['vote-given-to-party'];
+            voteCounts[party] = (voteCounts[party] || 0) + 1;
+        });
+
+        // Prepare data for the pie chart
+        const labels = Object.keys(voteCounts);
+        const counts = Object.values(voteCounts);
+
+        // Render the pie chart
+        const ctx = document.getElementById('voteChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Vote Distribution',
+                    data: counts,
+                    backgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#4BC0C0',
+                        '#9966FF',
+                        '#FF9F40'
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // Ensure manual sizing is applied
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                const party = tooltipItem.label;
+                                const count = counts[tooltipItem.dataIndex];
+                                return `${party}: ${count} votes`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

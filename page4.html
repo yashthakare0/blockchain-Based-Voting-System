@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voting Rules</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+           <h1>Blockchain Voting System</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-item" onclick="setActive(this)">Home</a></li>
+            <li><a href="page5.html" class="nav-item" onclick="setActive(this)">Voting Rules</a></li>
+            <li><a href="page4.html" class="nav-item" onclick="setActive(this)">Election Dates</a></li>
+            <li><a href="sign.html" class="nav-item" onclick="setActive(this)">Login</a></li>
+            <li><a href="j.html" class="nav-item" onclick="setActive(this)">Admin</a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" placeholder="Type here..." id="search-input">
+            <button onclick="searchFunction()">Search</button>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+    </nav>
+
+    <div class="rules-box">
+        <h1>Election Result</h1>
+        <ul>
+          <b> <li>Voter Registration Deadline: January 15, 2025</li>
+                   <li>Early Voting Begins: February 1, 2025</li>
+                   <li>Election Day: February 15, 2025</li>
+                   <li>Results Announcement: February 20, 2025</li></b>
+        </ul>
+    </div>
+
+    <style>
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #800678;
+            position: relative;
+            height: 50px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: larger;
+        }
+
+        .nav-item.active {
+            background-color: #006994;
+        }
+
+        ul li:hover a {
+            background-color: #006994;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 5px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .search-bar button {
+            padding: 5px 10px;
+            border: none;
+            background-color: #4682b4;
+            color: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #315f72;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        /* Content styles */
+        .rules-box {
+     
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+             background:linear-gradient(to right, #e2e2e2, #c9d6ff);
+
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            color: #555;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-links li {
+                text-align: left;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .search-bar {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .rules-box {
+                padding: 15px;
+                width: 90%;
+                    background:linear-gradient(to right, #e2e2e2, #c9d6ff);
+
+            }
+
+            .nav-item {
+                font-size: 1.1em;
+            }
+        }
+              body{ background:linear-gradient(to right, #e2e2e2, #c9d6ff);
+} 
+    </style>
+
+    <script>
+        // JavaScript for Hamburger Menu
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        // Search Function (Placeholder)
+        function searchFunction() {
+            const query = document.getElementById('search-input').value;
+            alert("Search feature not implemented yet. Query: " + query);
+        }
+    </script>
+</body>
+</html>
+

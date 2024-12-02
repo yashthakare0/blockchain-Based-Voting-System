@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+     <script type="module" src="admin.js"></script>
+    <style>
+        /* Basic Styling */
+        body {
+            background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #800678;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: #006994;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 5px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .search-bar button {
+            padding: 5px 10px;
+            border: none;
+            background-color: #4682b4;
+            color: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #315f72;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        /* Main Content Area */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .column {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #2c3e50;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .search-bar {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1, h2 {
+                font-size: 18px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .column {
+                padding: 15px;
+            }
+
+            .nav-links {
+                font-size: 14px;
+            }
+
+            .search-bar input, .search-bar button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1>Online Voting System</h1>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-item">Home</a></li>
+            <li><a href="page5.html" class="nav-item">Voting Rules</a></li>
+            <li><a href="page4.html" class="nav-item">Election Dates</a></li>
+            <li><a href="sign.html" class="nav-item">Login</a></li>
+            <li><a href="j.html" class="nav-item">Admin</a></li>
+            <li><a href="result.html" class="nav-item">Result</a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" placeholder="Type here..." id="search-input">
+            <button onclick="searchFunction()">Search</button>
+        </div>
+    </nav>
+
+    <!-- Welcome Message -->
+    <div>
+        <h1>Welcome to the Admin Panel</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- First Column -->
+        <div class="column">
+            <h2>Candidate Names</h2>
+            <table>
+                <tr><th>Candidate Name</th></tr>
+                <tr><td>Nitin Raut</td></tr>
+                <tr><td>Veer Kale</td></tr>
+                <tr><td>Ajay Kamble</td></tr>
+                <tr><td>Mohit Khode</td></tr>
+                <tr><td>Yashvant More</td></tr>
+            </table>
+        </div>
+
+        <!-- Second Column -->
+        <div class="column">
+            <h2>Party Names</h2>
+            <table>
+                <tr><th>Party Name</th></tr>
+                <tr><td>Bhartiya Janata Party</td></tr>
+                <tr><td>Shivsena</td></tr>
+                <tr><td>Congress</td></tr>
+                <tr><td>Maharashtra Navnirman Sena</td></tr>
+                <tr><td>Rashtravadi Congress</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Online Voting System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function for search button
+        function searchFunction() {
+            const query = document.getElementById('search-input').value;
+            alert("Search feature coming soon: " + query);
+        }
+    </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - User Verification</title>
+
+  
+    <style>
+        .user-list {
+            margin-top: 20px;
+        }
+        .user-item {
+            margin-bottom: 10px;
+        }
+        .done-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin - Verify New Users</h1>
+    <div id="userList" class="user-list">
+    </div>
+</body>
+</html>
+
+</body>
+</html>

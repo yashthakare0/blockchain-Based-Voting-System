@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="Google Sheet.css">
+	<style>
+		/* Container styling */
+		.container1 {
+			background-color: #f0f8ff; /* Light blue background */
+			padding: 20px;
+			border-radius: 10px;
+			width: 50%;
+			margin: auto;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
+
+		/* Form group styling */
+		.form-group {
+			display: flex;
+			align-items: center;
+			margin-bottom: 15px;
+		}
+
+		.form-group label {
+			width: 150px;
+			font-weight: bold;
+		}
+
+		.form-group input,
+		.form-group select {
+			flex: 1;
+			padding: 8px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+
+		/* Submit button styling */
+		#submit {
+			display: block;
+			margin: 20px auto 0; /* Centered */
+			background-color: #4caf50; /* Green background */
+			color: white;
+			font-size: 16px;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			width: 50%; /* Button width */
+		}
+
+		#submit:hover {
+			background-color: #45a049; /* Darker green on hover */
+		}
+	</style>
+</head>
+<body>
+	<div class="container1">
+		<form method="post" action="https://script.google.com/macros/s/AKfycbwFOOPrr5wfd0xtn6mxjRRH-depdQ7DDeIb2b8VUO24gs7Kj_E1S4vIsIH2wvvCRMJO/exec" name="contact-form">
+			<h4>Contact Us</h4>
+			<div class="form-group">
+				<label for="full-name">Full Name</label>
+				<input type="text" name="full-name" id="full-name" placeholder="Enter your full name">
+			</div>
+			<div class="form-group">
+				<label for="mobile-number">Mobile Number</label>
+				<input type="text" name="mobile-number" id="mobile-number" placeholder="Enter your mobile number">
+			</div>
+			<div class="form-group">
+				<label for="vote-given-to-party">Vote Given to Party</label>
+				<select name="vote-given-to-party" id="vote-given-to-party">
+					<option value="BJP">BJP</option>
+					<option value="Congress">Congress</option>
+					<option value="Shiv Sena">Shiv Sena</option>
+					<option value="Rashtravadi">Rashtravadi</option>
+				</select>
+			</div>
+			<input type="submit" value="Submit" id="submit">
+		</form>
+	</div>
+		<script src="Google Sheet.js"></script>
+</body>
+</html>
+
+
